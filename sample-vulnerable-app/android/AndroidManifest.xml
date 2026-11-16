@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Intentionally INSECURE manifest for the sample app. Used to demonstrate the
+  static analyzer's manifest checks. Do NOT ship anything like this.
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.insecurebank">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:debuggable="true"
+        android:usesCleartextTraffic="true"
+        android:label="InsecureBank">
+
+        <!-- Exported with no permission guard: reachable by any app on device -->
+        <activity
+            android:name=".TransferActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".LoginActivity" android:exported="false" />
+
+        <!-- Exported content provider with no permission -->
+        <provider
+            android:name=".AccountProvider"
+            android:authorities="com.example.insecurebank.accounts"
+            android:exported="true" />
+    </application>
+</manifest>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Intentionally INSECURE Info.plist. Demonstrates ATS + URL-scheme + file-sharing
+  findings. Do NOT ship this configuration.
+-->
+<plist version="1.0">
+<dict>
+    <key>CFBundleIdentifier</key>
+    <string>com.example.insecurebank</string>
+
+    <!-- ATS disabled globally -> IOS_ATS_DISABLED / MASVS-NETWORK-1 -->
+    <key>NSAppTransportSecurity</key>
+    <dict>
+        <key>NSAllowsArbitraryLoads</key>
+        <true/>
+        <key>NSExceptionDomains</key>
+        <dict>
+            <key>api.insecurebank.example</key>
+            <dict>
+                <key>NSExceptionAllowsInsecureHTTPLoads</key>
+                <true/>
+            </dict>
+        </dict>
+    </dict>
+
+    <!-- Custom URL scheme (hijack surface) -> IOS_CUSTOM_URL_SCHEME -->
+    <key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>insecurebank</string>
+            </array>
+        </dict>
+    </array>
+
+    <!-- iTunes file sharing on -> IOS_FILE_SHARING -->
+    <key>UIFileSharingEnabled</key>
+    <true/>
+</dict>
+</plist>

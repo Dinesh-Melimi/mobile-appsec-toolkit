@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mobile-appsec-toolkit"
+version = "0.1.0"
+description = "Static + dynamic mobile application security toolkit (Android/iOS) mapped to OWASP MASVS/MASTG"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "Dinesh Melimi" }]
+keywords = ["mobile", "appsec", "android", "ios", "security", "owasp", "masvs", "frida"]
+
+[project.optional-dependencies]
+apk = ["androguard>=4.1.0"]
+dev = ["pytest"]
+
+[project.scripts]
+mobile-appsec = "mobile_appsec.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

@@ -1,0 +1,3 @@
+# Core toolkit has no hard runtime dependencies (stdlib only) for manifest/plist checks.
+# APK binary parsing is optional and enabled by installing androguard:
+androguard>=4.1.0 ; python_version >= "3.9"
